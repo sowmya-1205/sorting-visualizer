@@ -61,12 +61,19 @@
 
     <p id="status" class="status" aria-live="polite">Ready. Generate cars to begin.</p>
 
-    <section class="track-wrapper" aria-label="Racetrack">
-      <div id="track" class="track">
-        <div id="carsLayer" class="cars-layer" aria-hidden="false"></div>
-        <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
-        <div class="finish-line" aria-hidden="true"></div>
+    <section class="visual-area">
+      <div class="track-wrapper" aria-label="Racetrack">
+        <div id="track" class="track">
+          <div id="carsLayer" class="cars-layer" aria-hidden="false"></div>
+          <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
+          <div class="finish-line" aria-hidden="true"></div>
+        </div>
       </div>
+
+      <aside class="sidebar" aria-label="Algorithm Info">
+        <h3>Algorithm Info</h3>
+        <div id="algoInfo" class="algo-info"></div>
+      </aside>
     </section>
 
     <footer class="app__footer">

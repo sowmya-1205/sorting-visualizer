@@ -28,13 +28,21 @@
   const btnReset = document.getElementById('btnReset');
 
   // ---------- STATE ----------
-  /** @type {number[]} */
-  let values = [];
-  /** car DOM nodes in index order */
-  /** @type {HTMLElement[]} */
-  let carEls = [];
+  /**
+   * Array of cars in visual/index order
+   * @type {{ value: number, el: HTMLElement, color: string }[]}
+   */
+  let cars = [];
   let isSorting = false;
   let isSorted = false;
+
+  // layout metrics for absolute positioning toward finish line
+  const layout = {
+    leftPad: 24,
+    rightPad: 72, // leave space before finish line
+    step: 80,
+    carWidth: 60,
+  };
 
   // animation speed map
   const speedToMs = {
