@@ -94,72 +94,32 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; background: v
 
 .status { margin: 16px 0; color: var(--muted); min-height: 24px; }
 
+
 .visual-area { display: grid; grid-template-columns: 1fr 320px; gap: 16px; align-items: start; }
-.track-wrapper { margin-top: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; box-shadow: var(--shadow); }
-.track {
+.board-wrapper { margin-top: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; box-shadow: var(--shadow); }
+.board { position: relative; height: clamp(220px, 35vh, 360px); border-radius: 14px; overflow: hidden; padding: 16px; }
+.cards-layer { position: absolute; inset: 16px; display: flex; align-items: center; gap: 10px; }
+
+
+/* Card visuals */
+.card {
   position: relative;
-  height: clamp(220px, 35vh, 360px);
-  background: repeating-linear-gradient(
-    90deg,
-    #1a1d3b 0 16px,
-    #202452 16px 32px
-  );
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-.finish-line {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 18px;
-  background-image: linear-gradient(45deg, #fff 25%, rgba(0,0,0,0) 25%),
-                    linear-gradient(-45deg, #fff 25%, rgba(0,0,0,0) 25%),
-                    linear-gradient(45deg, rgba(0,0,0,0) 75%, #fff 75%),
-                    linear-gradient(-45deg, rgba(0,0,0,0) 75%, #fff 75%);
-  background-size: 16px 16px; background-position: 0 0, 0 8px, 8px -8px, -8px 0;
-  opacity: 0.65;
-}
-
-.cars-layer {
-  position: absolute;
-  left: 0; right: 0; bottom: 20px; top: 20px;
-  /* absolute-positioned cars will live inside */
-}
-
-
-/* Lively car visuals */
-.car {
-  position: absolute;
-  width: 76px;
-  height: 40px;
-  border-radius: 8px 8px 10px 10px;
-  color: #0f1330;
-  transform: translateX(var(--tx, 0px)) translateZ(0) scaleY(var(--scale, 1));
-  transform-origin: center bottom;
+  width: 80px;
+  height: 100px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #2b2f63 0%, #1b1f4a 100%);
+  border: 1px solid #3b4188;
+  color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.35);
+  transform: translateX(var(--tx, 0px));
   transition: transform var(--anim, 400ms) cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 300ms, filter 200ms;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.35), inset 0 -4px 0 rgba(0,0,0,0.25);
-  will-change: transform, left, top;
 }
 
-.car .value { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); color: var(--text); font-size: 13px; text-shadow: none; font-weight: 700; }
-
-.car__body { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; }
-.car__roof { position: absolute; top: -10px; left: 10px; right: 10px; height: 16px; border-radius: 8px 8px 2px 2px; background: rgba(255,255,255,0.25); filter: brightness(1.2); }
-.car__window { position: absolute; top: 2px; left: 8px; right: 8px; height: 12px; border-radius: 4px; background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.2)); }
-.car__stripe { position: absolute; left: 0; right: 0; bottom: 6px; height: 6px; background: rgba(255,255,255,0.35); mix-blend-mode: screen; }
-.car__light--front, .car__light--rear { position: absolute; width: 8px; height: 8px; border-radius: 2px; bottom: 2px; }
-.car__light--front { right: 4px; background: radial-gradient(circle, #ffe27a 0%, #ffb703 60%, #b98000 100%); box-shadow: 0 0 8px #ffd166; }
-.car__light--rear { left: 4px; background: radial-gradient(circle, #ff6b6b 0%, #d7263d 70%, #7a0010 100%); box-shadow: 0 0 8px #ff6b6b; }
-.car__spoiler { position: absolute; top: -6px; right: 6px; width: 18px; height: 4px; background: rgba(0,0,0,0.25); border-radius: 2px; }
-
-.wheel { position: absolute; bottom: -6px; width: 16px; height: 16px; background: #121417; border-radius: 50%; box-shadow: inset 0 -2px 0 rgba(255,255,255,0.2); border: 2px solid #222; }
-.wheel--front { right: 10px; }
-.wheel--rear { left: 10px; }
-
-.car--compare { filter: brightness(1.2) saturate(1.2); box-shadow: 0 10px 24px rgba(255,209,102,0.5), inset 0 -6px 0 rgba(0,0,0,0.25); }
-.car--swap { animation: pulseSwap 280ms ease-in-out; }
+.card--compare { filter: brightness(1.2) saturate(1.2); box-shadow: 0 10px 24px rgba(255,209,102,0.5); }
+.card--swap { animation: pulseSwap 280ms ease-in-out; }
 
 @keyframes pulseSwap {
   0% { filter: brightness(1) saturate(1); box-shadow: 0 8px 16px rgba(0,0,0,0.35), inset 0 -6px 0 rgba(0,0,0,0.25); }
@@ -167,7 +127,7 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; background: v
   100% { filter: brightness(1) saturate(1); box-shadow: 0 8px 16px rgba(0,0,0,0.35), inset 0 -6px 0 rgba(0,0,0,0.25); }
 }
 
-.car--sorted { box-shadow: 0 0 0 2px rgba(39,224,163,0.6), 0 0 32px rgba(39,224,163,0.55), inset 0 -6px 0 rgba(0,0,0,0.25); }
+.card--sorted { box-shadow: 0 0 0 2px rgba(39,224,163,0.6), 0 0 32px rgba(39,224,163,0.55); }
 
 /* Confetti canvas */
 .confetti-canvas { position: absolute; inset: 0; pointer-events: none; }
